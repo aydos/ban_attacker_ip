@@ -32,3 +32,4 @@ cat newips >> iplist
 
 # iptables'ı kaydeder
 #service iptables save
+systemctl restart firewalld.service
