@@ -11,7 +11,7 @@ touch iplist
 # bir tane olanları iptables/firewall'dan çıkarır
 # birden fazla olanlar iptables/firewall'da kalmaya devam eder
 #sort iplist | uniq -c | awk '{if($1==1) print $2}' | xargs -I ip iptables -D INPUT -s ip -j DROP
-sort iplist | uniq -c | awk '{if($1==1) print $2}' | xargs -I ip firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="'ip'" accept'
+sort iplist | uniq -c | awk '{if($1==1) print $2}' | xargs -I ip firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="'ip'" reject'
 
 # her ip'den bir tanesini siler
 sort iplist -u | xargs -I ip sed -i '0,/'ip'/{//d;}' iplist
@@ -24,7 +24,7 @@ sed -n "/^$(date --date='5 minutes ago' '+%b %d %H:')/,\$p" /var/log/secure | gr
 
 # yeni gelen ip'leri iptables/firewall'a ekler
 #sort newips -u | xargs -I ip iptables -A INPUT -s ip -j DROP
-sort newips -u | xargs -I ip firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="'ip'" accept'
+sort newips -u | xargs -I ip firewall-cmd --zone=public --add-rich-rule='rule family="ipv4" source address="'ip'" reject'
 
 # yeni ip'leri listeye ekler
 cat newips >> iplist
