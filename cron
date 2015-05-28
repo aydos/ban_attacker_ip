@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ipilist dosyası yoksa oluşturur
+# iplist dosyası yoksa oluşturur
 touch iplist
 
 # bir tane olanları iptables/firewall'dan çıkarır
