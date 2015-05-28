@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# FOR CENTOS
+# NOT TESTED YET
+
 # iplist dosyası yoksa oluşturur
 touch iplist
 
