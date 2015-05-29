@@ -3,7 +3,6 @@
 # Fahri Aydos (http://aydos.com) 2015 05 28
 
 # FOR CENTOS
-# NOT TESTED YET
 # USAGE :
 #### make executable for root
 # chmod u+x path_to_/banip.sh
@@ -14,10 +13,10 @@
 # iplist dosyası yoksa oluşturur
 touch /tmp/iplist
 
-# bir tane olanları iptables/firewall'dan çıkarır
+# TÜRKÇE: bir tane olanları iptables/firewall'dan çıkarır
 # birden fazla olanlar iptables/firewall'da kalmaya devam eder
 # bu sayıyı artırabilirsiniz, böylece mesela 5 defa atak yapmadan bloklanmaz
-# remove ip from iptables/firewall if there is only one
+# ENGLISH: remove ip from iptables/firewall if there is only one
 # you can set up higher value if you like ban more serious attackers
 #sort iplist | uniq -c | awk '{if($1==1) print $2}' | xargs -I IP iptables -D INPUT -s IP -j DROP
 sort /tmp/iplist | uniq -c | awk '{if($1==1) print $2}' | xargs -I IP firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address="IP" reject'
