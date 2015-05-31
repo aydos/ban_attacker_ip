@@ -1,8 +1,8 @@
 # ban_attacker_ip
 
-Add attackers ip to firewall. Remove after a time passed.
+Get the ssh login attackers ips and add them to firewall. Each attack banned for five minutes. So if an ip do more attacks, it will be baned (five * attack count) minutes.
 
-For Centos
+It's works on Centos 7.
 
 # Usage
 
