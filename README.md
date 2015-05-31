@@ -2,14 +2,14 @@
 
 Add attackers ip to firewall. Remove after a time passed.
 
-For Centos, NOT TESTED.
+For Centos
 
-# USAGE :
+# Usage
 
 make executable for root
 
-  chmod u+x path_to_/banip.sh
+    chmod u+x path_to_/banip.sh
  
 add to cron (run it every 5 min)
 
-  */5  *  *  *  *  path_to_/banip.sh
+    */5  *  *  *  *  path_to_/banip.sh
