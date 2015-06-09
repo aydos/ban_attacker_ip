@@ -23,17 +23,17 @@ sort /tmp/iplist | uniq -c | awk '{if($1==1) print $2}' | xargs -I IP firewall-c
 
 # her ip'den bir tanesini siler
 # delete only one copy of ip
-sort /tmp/iplist -u | xargs -I ip sed -i '0,/'ip'/{//d;}' iplist
+sort /tmp/iplist -u | xargs -I ip sed -i '0,/'ip'/{//d;}' /tmp/iplist
 
 # son 5 dakika içinde yapılan atakları dosyaya yazar
 # get the attackers ips for last 5 minutes
 
 # root'a yapılan ataklar (root login'i kapatılmalı)
 # for root (you must/should disable root login)
-sed -n "/^$(date --date='5 minutes ago' '+%b %d %H:')/,\$p" /var/log/secure | grep "Failed.*root" | awk '{print $11}' > newips
+sed -n "/^$(date --date='5 minutes ago' '+%b %d %H:')/,\$p" /var/log/secure | grep "Failed.*root" | awk '{print $11}' > /tmp/newips
 # olmayan kullanıcılara yapılan ataklar (admin, mysqladmin gibi)
 # for non exist users (eg admin, mysqladmin)
-sed -n "/^$(date --date='5 minutes ago' '+%b %d %H:')/,\$p" /var/log/secure | grep "Failed.*invalid" | awk '{print $13}' >> newips
+sed -n "/^$(date --date='5 minutes ago' '+%b %d %H:')/,\$p" /var/log/secure | grep "Failed.*invalid" | awk '{print $13}' >> /tmp/newips
 
 # yeni gelen ip'leri iptables/firewall'a ekler
 # add new ips to iptables/firewall
@@ -45,6 +45,6 @@ sort /tmp/newips -u | xargs -I IP firewall-cmd --zone=public --add-rich-rule='ru
 cat /tmp/newips >> /tmp/iplist
 #rm -rf newips
 
-# iptables'ı kaydeder
+#iptables'ı kaydeder
 #service iptables save
 #systemctl restart firewalld.service
